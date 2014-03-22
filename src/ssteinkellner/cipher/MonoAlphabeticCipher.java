@@ -1,5 +1,7 @@
 package ssteinkellner.cipher;
 
+import org.omg.IOP.CodecPackage.FormatMismatch;
+
 /**
  * Die Klasse MonoAlphabeticCipher stellt die Basisfunktionalitäten auf Basis des Interfaces Cipher zur Verfügung.
  * <br />Sie setzt das Geheimalphabet immer auf das Ausgangsalphabet (abcdefghijklmnopqrstuvwxyzäöüß)
@@ -13,13 +15,14 @@ package ssteinkellner.cipher;
  * @version 2014.03.22
  */
 public class MonoAlphabeticCipher implements Cipher{
-	private String secretAlphabet;
+	private String secretAlphabet, ausgangsAlphabet;
 	
 	/**
 	 * setzt das Geheimalphabet auf das Ausgangsalphabet (abcdefghijklmnopqrstuvwxyzäöüß)
 	 */
 	public MonoAlphabeticCipher(){
-		secretAlphabet = "abcdefghijklmnopqrstuvwxyzäöüß";
+		ausgangsAlphabet = "abcdefghijklmnopqrstuvwxyzäöüß";
+		secretAlphabet = ausgangsAlphabet;
 	}
 	
 	/**
@@ -32,20 +35,61 @@ public class MonoAlphabeticCipher implements Cipher{
 	
 	/**
 	 * stellt für Subklassen die  Möglichkeit bereit, das Attribut zu ändern
-	 * @param secretAlphabet
-	 * @return
+	 * @param secretAlphabet - das Geheimalphabet, das verwendet werden soll
+	 * @throws FormatMismatch wenn das Geheimalphabet nicht 30 zeichen lang ist
 	 */
-	protected void setSecretAlphabet(String secretAlphabet){
-		
+	protected void setSecretAlphabet(String secretAlphabet) throws FormatMismatch{
+		if(secretAlphabet.length()!=30){
+			throw(new FormatMismatch(""));
+		}
+		this.secretAlphabet = secretAlphabet;
 	}
 	
 	
 	@Override
 	public String encrypt(String text) {
-		return null;
+		String out = "";	// verschlüsselter String
+		boolean def;		// default-wert (wenn der buchstabe nicht im secretAlphabet vorkommt)
+		String in = text.toLowerCase();
+		/*
+		 * Überlegung dazu:
+		 * ich das zeichen an jeder stelle im text an
+		 * und prüfe, ob es im ausgangsalphabet vorhanen ist
+		 * wenn ja, dann ersetze ich es mit dem zeichen, das im
+		 * secretalphabet an der stelle sitzt, an der im
+		 * ausgangsalphabet das eben untersuchte zeichen ist
+		 */
+		for(int tpos=0;tpos<in.length();tpos++){
+			def=true;
+			for(int apos=0;apos<ausgangsAlphabet.length();apos++){ // text-position
+				if(in.charAt(tpos) == ausgangsAlphabet.charAt(apos)){ // alphabet-position
+					def=false;
+					out+=secretAlphabet.charAt(apos);
+				}
+			}
+			if(def){
+				out+=in.charAt(tpos);
+			}
+		}
+		return out;
 	}
 	@Override
 	public String decrypt(String text) {
-		return null;
+		String out = "";
+		boolean def;
+		String in = text.toLowerCase();
+		for(int tpos=0;tpos<in.length();tpos++){
+			def=true;
+			for(int apos=0;apos<secretAlphabet.length();apos++){
+				if(in.charAt(tpos) == secretAlphabet.charAt(apos)){
+					def=false;
+					out+=ausgangsAlphabet.charAt(apos);
+				}
+			}
+			if(def){
+				out+=in.charAt(tpos);
+			}
+		}
+		return out;
 	}
 }
