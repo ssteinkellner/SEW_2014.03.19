@@ -36,11 +36,20 @@ public class MonoAlphabeticCipher implements Cipher{
 	/**
 	 * stellt für Subklassen die  Möglichkeit bereit, das Attribut zu ändern
 	 * @param secretAlphabet - das Geheimalphabet, das verwendet werden soll
-	 * @throws FormatMismatch wenn das Geheimalphabet nicht 30 zeichen lang ist
+	 * @throws SecretException wenn das Geheimalphabet nicht 30 zeichen lang ist
 	 */
-	protected void setSecretAlphabet(String secretAlphabet) throws FormatMismatch{
+	protected void setSecretAlphabet(String secretAlphabet) throws SecretException{
 		if(secretAlphabet.length()!=30){
-			throw(new FormatMismatch(""));
+			throw(new SecretException("secretAlphabet has to be exactly 30 characters long"));
+		}
+		for(int i=0;i<secretAlphabet.length();i++){
+			for(int j=0;j<secretAlphabet.length()-1;j++){
+				if(i!=j){
+					if(secretAlphabet.charAt(i)==secretAlphabet.charAt(j)){
+						throw(new SecretException("secretAlphabet has a doubled character"));
+					}
+				}
+			}
 		}
 		this.secretAlphabet = secretAlphabet;
 	}
@@ -62,9 +71,10 @@ public class MonoAlphabeticCipher implements Cipher{
 		for(int tpos=0;tpos<in.length();tpos++){
 			def=true;
 			for(int apos=0;apos<ausgangsAlphabet.length();apos++){ // text-position
-				if(in.charAt(tpos) == ausgangsAlphabet.charAt(apos)){ // alphabet-position
+				if(in.charAt(tpos) == secretAlphabet.charAt(apos)){ // alphabet-position
 					def=false;
-					out+=secretAlphabet.charAt(apos);
+					out+=ausgangsAlphabet.charAt(apos);
+					apos = secretAlphabet.length();
 				}
 			}
 			if(def){
@@ -81,9 +91,10 @@ public class MonoAlphabeticCipher implements Cipher{
 		for(int tpos=0;tpos<in.length();tpos++){
 			def=true;
 			for(int apos=0;apos<secretAlphabet.length();apos++){
-				if(in.charAt(tpos) == secretAlphabet.charAt(apos)){
+				if(in.charAt(tpos) == ausgangsAlphabet.charAt(apos)){
 					def=false;
-					out+=ausgangsAlphabet.charAt(apos);
+					out+=secretAlphabet.charAt(apos);
+					apos = secretAlphabet.length();
 				}
 			}
 			if(def){
