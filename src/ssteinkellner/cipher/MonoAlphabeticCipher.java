@@ -1,6 +1,5 @@
 package ssteinkellner.cipher;
 
-import org.omg.IOP.CodecPackage.FormatMismatch;
 
 /**
  * Die Klasse MonoAlphabeticCipher stellt die Basisfunktionalitäten auf Basis des Interfaces Cipher zur Verfügung.
