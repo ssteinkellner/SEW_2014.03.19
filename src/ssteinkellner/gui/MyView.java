@@ -6,9 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import ssteinkellner.cipher.Cipher;
+import ssteinkellner.cipher.SecretException;
+import ssteinkellner.cipher.SubstitutionCipher;
 
 /**
  * @author SSteinkellner
@@ -85,12 +90,51 @@ public class MyView extends JPanel implements ActionListener{
 			text = m.getActiveCipher().decrypt(text);		//text entschlüsseln
 			felder[0].getArea().setText(text);				//text in feld 1 schreiben
 		}else if(cmd.equals("opt")){
-//			JTextField key = new JTextField(20);
-//			Object[] anzeige = {"select Cipher",key};
-//			int ok = JOptionPane.showConfirmDialog(null, anzeige, "options",
-//					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-//			if(ok==0){
-//				
+			JComboBox<String> wahl = new JComboBox<String>(m.getCipherNames()); //eine Dropdown-box mit den verschiedenen ciphern
+			JTextField key = new JTextField(20);			//ein textfeld
+			Object[] anzeige = {"select Cipher",wahl,key};	//ein object-array zum anzeigen im dialog
+			int ok = JOptionPane.showConfirmDialog(null, anzeige, "options",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+//			System.out.println(ok);
+			if(ok!=0){ return; }	//return wenn nicht ok gedrückt wurde
+			m.selectCipher(wahl.getSelectedIndex());	//dem model wird mitgeteilt, welcher cipher jetzt verwendet werden soll
+			setCipherKey(key.getText());				//ruft methode zur schlüsseländerung auf
+		}
+	}
+	
+	/**
+	 * method, that changes the key as needed for the active cipher
+	 * @param key new key, that the user has typed into the textfield
+	 */
+	private void setCipherKey(String key){
+		Cipher c = m.getActiveCipher();
+		if(c instanceof SubstitutionCipher){
+			try {
+				((SubstitutionCipher)c).setSecretAlphabet(key);
+			} catch (SecretException e) {
+//				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+//		}else if(c instanceof ShiftCipher){
+//			try {
+//				((ShiftCipher)c).setShiftAmount(Integer.parseInt(key));
+//			} catch (SecretException e) {
+////				e.printStackTrace();
+//				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+//			}
+//		}else if(c instanceof KeywordCipher){
+//			try {
+//				((KeywordCipher)c).setKeyword(key);
+//			} catch (SecretException e) {
+////			e.printStackTrace();
+//				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+//			}
+//		}else if(c instanceof TranspositionCipher){
+//			try {
+//				((TranspositionCipher)c)setTranspositionLevel(Integer.parseInt(key));
+//			} catch (SecretException e) {
+////			e.printStackTrace();
+//				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 //			}
 		}
 	}
