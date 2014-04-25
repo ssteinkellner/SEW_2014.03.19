@@ -8,11 +8,17 @@
  */
 public class KeywordCipher extends MonoAlphabeticCipher
 {
+    /**
+     * Konstruktor um denn konstruktor der superklasse aufzurufen und um das keyword zu setzen
+     */
     public KeywordCipher(String keyword)
     {
         super();
         this.setKeyword(keyword);
     }
+    /**
+     * Methoden um das geheimalphabet zu erstellen
+     */
     public void setKeyword(String keyword)
     {
         String key = keyword;

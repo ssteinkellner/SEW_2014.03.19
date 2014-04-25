@@ -7,11 +7,17 @@
  */
 public class ShiftCipher extends MonoAlphabeticCipher
 {
+    /**
+     * Konstruktor um denn konstruktor der superklasse aufzurufen und um denn Wert zu übergeben
+     */
     public ShiftCipher (int value)
     {
         super();
         this.setShiftAmount(value);
     }
+    /**
+     * Das Geheimalphabet wird erzeugt und übergeben indem man das Alphabet um den Wert Value verschiebt
+     */
     public void setShiftAmount(int shiftvalue)
     {
         if(shiftvalue > 30 || shiftvalue < 0)
