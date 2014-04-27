@@ -11,9 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ssteinkellner_dstrasser.cipher.Cipher;
-import ssteinkellner_dstrasser.cipher.SecretException;
-import ssteinkellner_dstrasser.cipher.SubstitutionCipher;
+import ssteinkellner_dstrasser.cipher.*;
 
 /**
  * @author SSteinkellner
@@ -115,27 +113,27 @@ public class MyView extends JPanel implements ActionListener{
 //				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
-//		}else if(c instanceof ShiftCipher){
-//			try {
-//				((ShiftCipher)c).setShiftAmount(Integer.parseInt(key));
-//			} catch (SecretException e) {
-////				e.printStackTrace();
-//				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-//			}
-//		}else if(c instanceof KeywordCipher){
-//			try {
-//				((KeywordCipher)c).setKeyword(key);
-//			} catch (SecretException e) {
-////			e.printStackTrace();
-//				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-//			}
-//		}else if(c instanceof TranspositionCipher){
-//			try {
-//				((TranspositionCipher)c)setTranspositionLevel(Integer.parseInt(key));
-//			} catch (SecretException e) {
-////			e.printStackTrace();
-//				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-//			}
+		}else if(c instanceof ShiftCipher){
+			try {
+				((ShiftCipher)c).setShiftAmount(Integer.parseInt(key));
+			} catch (SecretException e) {
+//				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+		}else if(c instanceof KeywordCipher){
+			try {
+				((KeywordCipher)c).setKeyword(key);
+			} catch (SecretException e) {
+//			e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+		}else if(c instanceof TranspositionCipher){
+			try {
+				((TranspositionCipher)c).setTranspositionLevel(Integer.parseInt(key));
+			} catch (SecretException e) {
+//			e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 }

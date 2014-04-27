@@ -21,18 +21,34 @@ public class StartChipher {
 	public StartChipher(String title){
 		m = new MyModel();
 		try {
-			Cipher defaultCipher = new SubstitutionCipher("defghijklmnopqrstuvwxyzäöüßabc");
+			Cipher defaultCipher = new SubstitutionCipher("ßüöäzyxwvutsrqponmlkjihgfedcba");
 			m.add("SubstitutionCipher", defaultCipher);
 		} catch (SecretException se) {
 			se.printStackTrace();
 			return;
 		}
+		
 		try {
 			m.add("KeywordCipher", new KeywordCipher("hallo"));
 		} catch (SecretException se) {
 			se.printStackTrace();
 			return;
 		}
+		
+		try {
+			m.add("ShiftCipher", new ShiftCipher(5));
+		} catch (SecretException se) {
+			se.printStackTrace();
+			return;
+		}
+		
+		try {
+			m.add("TranspositionCipher", new TranspositionCipher(5));
+		} catch (SecretException se) {
+			se.printStackTrace();
+			return;
+		}
+		
 		v = new MyView(m);
 		f = new MyFrame(v,title);
 		f.setMinimumSize(new Dimension(300,200));
