@@ -2,9 +2,7 @@ package ssteinkellner.gui;
 
 import java.awt.Dimension;
 
-import ssteinkellner.cipher.Cipher;
-import ssteinkellner.cipher.SecretException;
-import ssteinkellner.cipher.SubstitutionCipher;
+import ssteinkellner.cipher.*;
 
 public class StartChipher {
 	private MyModel m;
@@ -25,6 +23,12 @@ public class StartChipher {
 		try {
 			Cipher defaultCipher = new SubstitutionCipher("defghijklmnopqrstuvwxyzäöüßabc");
 			m.add("SubstitutionCipher", defaultCipher);
+		} catch (SecretException se) {
+			se.printStackTrace();
+			return;
+		}
+		try {
+			m.add("KeywordCipher", new KeywordCipher("hallo"));
 		} catch (SecretException se) {
 			se.printStackTrace();
 			return;

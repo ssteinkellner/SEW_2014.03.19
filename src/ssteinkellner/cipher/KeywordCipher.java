@@ -1,3 +1,4 @@
+package ssteinkellner.cipher;
 
 /**
  * Für das Geheimalphabet werden Buchstaben aus dem Keyword vorne an das Standard alphabet gehängt
@@ -11,7 +12,7 @@ public class KeywordCipher extends MonoAlphabeticCipher
     /**
      * Konstruktor um denn konstruktor der superklasse aufzurufen und um das keyword zu setzen
      */
-    public KeywordCipher(String keyword)
+    public KeywordCipher(String keyword) throws SecretException
     {
         super();
         this.setKeyword(keyword);
@@ -19,17 +20,25 @@ public class KeywordCipher extends MonoAlphabeticCipher
     /**
      * Methoden um das geheimalphabet zu erstellen
      */
-    public void setKeyword(String keyword)
+    public void setKeyword(String keyword) throws SecretException
     {
-        String key = keyword;
-        String alphabet="", standardAlphabet = MonoAlphabeticCipher.standardAlphabet;
+    	String key="";
+        for(int i=0;i<keyword.length();i++){
+        	char c = keyword.charAt(i);
+            if(keyword.indexOf(c) == i){
+                key += c;
+            }
+        }
+        
+        String alphabet="", standardAlphabet = MonoAlphabeticCipher.standartAlphabet;
         for(int i = 0; i < standardAlphabet.length(); i++)
         {
             char c = standardAlphabet.charAt(i);
-            if(keyword.indexOf(c)<0){
+            if(key.indexOf(c)<0){
                 alphabet += c;
             }
         }
-        super.setSecretAlphabet(alphabet);
+        
+        super.setSecretAlphabet(key + alphabet);
     }
 }

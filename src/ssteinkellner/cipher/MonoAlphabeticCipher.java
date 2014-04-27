@@ -1,9 +1,8 @@
 package ssteinkellner.cipher;
 
-
 /**
  * Die Klasse MonoAlphabeticCipher stellt die Basisfunktionalitäten auf Basis des Interfaces Cipher zur Verfügung.
- * <br />Sie setzt das Geheimalphabet immer auf das Ausgangsalphabet (abcdefghijklmnopqrstuvwxyzäöüß)
+ * <br />Sie setzt das Geheimalphabet immer auf das standartAlphabet (abcdefghijklmnopqrstuvwxyzäöüß)
  * wodurch bei der Superklasse de facto keine Verschlüsselung stattfindet. Trotzdem sollen die
  * beiden Methoden encrypt und decrypt mit jedem Geheimalphabet arbeiten können, da ja die
  * Subklassen diese Methoden nicht implementieren, das Geheimalphabet je nach Klasse aber
@@ -14,14 +13,15 @@ package ssteinkellner.cipher;
  * @version 2014.03.22
  */
 public class MonoAlphabeticCipher implements Cipher{
-	private String secretAlphabet, ausgangsAlphabet;
+	private String secretAlphabet;
+	protected static String standartAlphabet;
 	
 	/**
-	 * setzt das Geheimalphabet auf das Ausgangsalphabet (abcdefghijklmnopqrstuvwxyzäöüß)
+	 * setzt das Geheimalphabet auf das standartAlphabet (abcdefghijklmnopqrstuvwxyzäöüß)
 	 */
 	public MonoAlphabeticCipher(){
-		ausgangsAlphabet = "abcdefghijklmnopqrstuvwxyzäöüß";
-		secretAlphabet = ausgangsAlphabet;
+		standartAlphabet = "abcdefghijklmnopqrstuvwxyzäöüß";
+		secretAlphabet = standartAlphabet;
 	}
 	
 	/**
@@ -62,17 +62,17 @@ public class MonoAlphabeticCipher implements Cipher{
 		/*
 		 * Überlegung dazu:
 		 * ich das zeichen an jeder stelle im text an
-		 * und prüfe, ob es im ausgangsalphabet vorhanen ist
+		 * und prüfe, ob es im standartAlphabet vorhanen ist
 		 * wenn ja, dann ersetze ich es mit dem zeichen, das im
 		 * secretalphabet an der stelle sitzt, an der im
-		 * ausgangsalphabet das eben untersuchte zeichen ist
+		 * standartAlphabet das eben untersuchte zeichen ist
 		 */
 		for(int tpos=0;tpos<in.length();tpos++){
 			def=true;
-			for(int apos=0;apos<ausgangsAlphabet.length();apos++){ // text-position
+			for(int apos=0;apos<standartAlphabet.length();apos++){ // text-position
 				if(in.charAt(tpos) == secretAlphabet.charAt(apos)){ // alphabet-position
 					def=false;
-					out+=ausgangsAlphabet.charAt(apos);
+					out+=standartAlphabet.charAt(apos);
 					apos = secretAlphabet.length();
 				}
 			}
@@ -90,7 +90,7 @@ public class MonoAlphabeticCipher implements Cipher{
 		for(int tpos=0;tpos<in.length();tpos++){
 			def=true;
 			for(int apos=0;apos<secretAlphabet.length();apos++){
-				if(in.charAt(tpos) == ausgangsAlphabet.charAt(apos)){
+				if(in.charAt(tpos) == standartAlphabet.charAt(apos)){
 					def=false;
 					out+=secretAlphabet.charAt(apos);
 					apos = secretAlphabet.length();
