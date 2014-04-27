@@ -1,10 +1,9 @@
-package ssteinkellner.gui;
+package ssteinkellner_dstrasser.gui;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextArea;
 
 /**

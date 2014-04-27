@@ -1,4 +1,4 @@
-package ssteinkellner.gui;
+package ssteinkellner_dstrasser.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ssteinkellner.cipher.Cipher;
-import ssteinkellner.cipher.SecretException;
-import ssteinkellner.cipher.SubstitutionCipher;
+import ssteinkellner_dstrasser.cipher.Cipher;
+import ssteinkellner_dstrasser.cipher.SecretException;
+import ssteinkellner_dstrasser.cipher.SubstitutionCipher;
 
 /**
  * @author SSteinkellner

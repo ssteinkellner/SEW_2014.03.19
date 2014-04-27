@@ -1,4 +1,4 @@
-package ssteinkellner.cipher;
+package ssteinkellner_dstrasser.cipher;
 
 /**
  * Die Klasse MonoAlphabeticCipher stellt die Basisfunktionalitäten auf Basis des Interfaces Cipher zur Verfügung.

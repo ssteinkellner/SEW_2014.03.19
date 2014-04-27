@@ -1,12 +1,11 @@
-package ssteinkellner.test;
+package ssteinkellner_dstrasser.test;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.IOP.CodecPackage.FormatMismatch;
 
-import ssteinkellner.cipher.SecretException;
-import ssteinkellner.cipher.SubstitutionCipher;
+import ssteinkellner_dstrasser.cipher.SecretException;
+import ssteinkellner_dstrasser.cipher.SubstitutionCipher;
 
 public class Tests {
 	SubstitutionCipher sub;

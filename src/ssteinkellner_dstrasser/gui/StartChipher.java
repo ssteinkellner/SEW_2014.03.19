@@ -1,8 +1,8 @@
-package ssteinkellner.gui;
+package ssteinkellner_dstrasser.gui;
 
 import java.awt.Dimension;
 
-import ssteinkellner.cipher.*;
+import ssteinkellner_dstrasser.cipher.*;
 
 public class StartChipher {
 	private MyModel m;

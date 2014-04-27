@@ -1,4 +1,4 @@
-package ssteinkellner.gui;
+package ssteinkellner_dstrasser.gui;
 
 
 import java.awt.BorderLayout;

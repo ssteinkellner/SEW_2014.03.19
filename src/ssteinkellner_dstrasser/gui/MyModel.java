@@ -1,9 +1,9 @@
-package ssteinkellner.gui;
+package ssteinkellner_dstrasser.gui;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import ssteinkellner.cipher.Cipher;
+import ssteinkellner_dstrasser.cipher.Cipher;
 
 /**
  * verschlüsselungs-algorithmus verwaltung

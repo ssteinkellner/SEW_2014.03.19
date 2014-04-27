@@ -1,4 +1,4 @@
-package ssteinkellner.cipher;
+package ssteinkellner_dstrasser.cipher;
 
 /**
  * Für das Geheimalphabet werden Buchstaben aus dem Keyword vorne an das Standard alphabet gehängt

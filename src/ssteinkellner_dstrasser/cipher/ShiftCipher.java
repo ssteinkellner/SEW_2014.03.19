@@ -1,4 +1,4 @@
-package ssteinkellner.cipher;
+package ssteinkellner_dstrasser.cipher;
 
 /**
  * Verschiebt für das Geheimalphabet das standard Alphabet um den Wert value
